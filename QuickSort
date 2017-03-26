@@ -1,0 +1,68 @@
+public class QuickSort {
+	public static void main(String[] args) {
+		int[] arr={0,1};
+		int i=0;
+		int j=arr.length-1;
+		quicksortOnce(arr,i,j);
+		System.out.println("final result");
+		for(int f=0;f<arr.length;f++){
+			System.out.print(arr[f]+" ");
+		}
+		
+	}
+
+	private static void quicksortOnce(int[] arr, int i, int j) {
+		System.out.println("quicksortOnce,starting");
+		int start=i;
+		int end=j;
+		int base=arr[i];
+		while(true){
+			/*
+			 * 一趟排序包括三个步骤 
+			 * 1 2 3
+			 * 无限循环，break条件是i==j为true；
+			 * */
+			
+			//1
+			//hi<--
+			//arr[j]如果比基数大，下标-1,j--；
+			while(j>i){
+				if(arr[j]>base){j=j-1;}
+				else break;
+			}
+			//判断i==j;
+			if(i==j){break;}
+			
+			//2
+			//交换位置
+			arr=swip(arr,i,j);
+			
+			//3
+			//i++;
+			//arr[i]<基数，i++
+			//！！！如果arr[i]与arr[j]相等，默认i++;否则死循环；
+			while(i<j){
+				if(arr[i]<base){i=i+1;}
+				else if(arr[i]==base&&arr[j]==base){i=i+1;}
+				else break;
+			}
+			//判断i==j;
+			if(i==j){break;}
+			
+		}
+		System.out.println(i+ " "+j);
+		//递归
+		int p=i;
+		if((p-start)>=2){quicksortOnce(arr,start,p-1);}
+		if((end-p)>=2){quicksortOnce(arr,p+1,end);}
+	}
+
+	private static int[] swip(int[] arr, int i, int j) {
+		int temp=arr[i];
+		arr[i]=arr[j];
+		arr[j]=temp;
+		return arr;
+	}
+	
+	
+}
